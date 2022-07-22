@@ -1,0 +1,7 @@
+---
+- name: Deploy Moodle 
+  hosts: all
+  become: true 
+
+  roles:
+    - moodle-role

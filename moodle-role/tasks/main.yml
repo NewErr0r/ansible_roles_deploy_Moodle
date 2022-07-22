@@ -1,0 +1,6 @@
+---
+- name: Configure timezone
+  shell: timedatectl set-timezone Europe/Moscow
+
+- name: Install LEMP stack
+  include_tasks: deploy_lemp_stack.yaml

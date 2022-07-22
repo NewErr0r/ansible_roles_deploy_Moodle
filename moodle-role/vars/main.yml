@@ -1,0 +1,10 @@
+---
+mariadb_packages:
+  - mariadb-server
+  - python3-PyMySQL
+
+php_fpm_packages:
+  - php-fpm 
+  - php-mysqlnd
+
+path_wwwconf: /etc/php-fpm.d/www.conf

@@ -1,0 +1,50 @@
+---
+- name: Install Web-Server NGINX
+  dnf:
+    name: nginx 
+    state: latest
+  notify:
+    - Started and Enabled NGINX
+
+- name: Install MariaDB
+  dnf: 
+    name: "{{ mariadb_packages }}"
+    state: latest
+
+- name: Started and Enabled MariaDB
+  service:
+    name: mariadb
+    enabled: yes 
+    state: started
+
+- name: Configurations root password for MariaDB
+  mysql_user:
+    check_implicit_admin: true
+    login_user: "{{ mysql_root_user }}" 
+    login_password: "{{ mysql_root_pass }}"
+    user: root 
+    password: "{{ mysql_root_pass }}"
+    host: localhost 
+
+- name: Configure Firewalld
+  firewalld:
+    port: "3306/tcp"
+    permanent: true
+    state: enabled
+  notify:
+    - Restart Firewalld
+
+- name: Install PHP-FPM
+  dnf: 
+    name: "{{ php_fpm_packages }}"
+    state: latest 
+  notify: 
+    - Started and Enabled PHP-FPM
+
+- name: Settings PHP-FPM
+  copy:
+    src: www.conf
+    dest: "{{ path_wwwconf }}"
+  notify: 
+    - Restart NGINX
+    - Restart PHP-FPM

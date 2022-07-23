@@ -1,0 +1,24 @@
+---
+- name: Create DataBase for Moodle
+  community.mysql.mysql_db:
+    name: "{{ name_new_database }}"
+    state: present
+    login_user: "{{ mysql_root_user }}" 
+    login_password: "{{ mysql_root_pass }}"
+
+- name: Create User for Moodle
+  community.mysql.mysql_user:
+    name: "{{ name_new_user_database }}"
+    password: "{{ pass_new_user_database }}"
+    priv: '*.*:ALL,GRANT'
+    host: '%'
+    state: present
+    login_user: "{{ mysql_root_user }}"
+    login_password: "{{ mysql_root_pass }}"
+
+- name: Remote access for MariaDB
+  template:
+    src: mariadb-server.cnf.j2
+    dest: "{{ remote_access_db }}"
+  notify: 
+    - Restart MariaDB

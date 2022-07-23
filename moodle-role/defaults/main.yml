@@ -1,3 +1,12 @@
 ---
 mysql_root_user: "root"
 mysql_root_pass: "P@ssw0rd"
+
+###MariaDB for Moodle###
+name_new_database: "moodledb"
+name_new_user_database: "moodleadmin"
+pass_new_user_database: "P@ssw0rd"
+bind_address: "0.0.0.0"   #allow networks to connect DB
+
+moodle_project: "https://download.moodle.org/download.php/direct/stable39/moodle-latest-39.tgz"
+path_moodle_project: /var/www/html

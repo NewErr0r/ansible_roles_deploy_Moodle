@@ -1,0 +1,8 @@
+---
+- name: Allow http traffic
+  firewalld:
+    service: http 
+    permanent: true 
+    state: enabled
+  notify:
+    - Restart Firewalld

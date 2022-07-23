@@ -1,0 +1,6 @@
+---
+- name: Set httpd_can_network_connect flag on and keep it persistent across reboots
+  command: setsebool -P httpd_can_network_connect on
+
+- name: SELinux allow 
+  command: chcon -R --type httpd_sys_rw_content_t /var/www/html

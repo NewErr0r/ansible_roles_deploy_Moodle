@@ -4,3 +4,23 @@
 
 - name: Install LEMP stack
   include_tasks: deploy_lemp_stack.yaml
+
+- name: Installing Extensions PHP for Moodle
+  dnf: 
+    name: "{{ extensions_php }}"
+    state: latest
+
+- name: Settings MariaDB for Moodle
+  include_tasks: settings_mariadb.yaml
+
+- name: Downloading the Moodle project
+  include_tasks: download_moodle.yaml
+
+- name: Launching the Moodle project
+  include_tasks: launch_moodle.yaml
+
+- name: Configure SELinux 
+  include_tasks: selinux.yaml
+
+- name: Configure Firewalld
+  include_tasks: firewalld.yaml

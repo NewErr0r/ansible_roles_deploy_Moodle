@@ -26,6 +26,15 @@
     name: php-fpm
     state: restarted
 
+- name: Restart MariaDB
+  service: 
+    name: mariadb
+    state: restarted
+
+
+
+    
+
 
 
 

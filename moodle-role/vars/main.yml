@@ -8,3 +8,25 @@ php_fpm_packages:
   - php-mysqlnd
 
 path_wwwconf: /etc/php-fpm.d/www.conf
+
+extensions_php:
+  - php-common
+  - php-iconv
+  - php-curl
+  - php-mbstring
+  - php-xmlrpc
+  - php-soap
+  - php-zip
+  - php-gd
+  - php-xml
+  - php-intl
+  - php-json
+  - graphviz
+  - aspell
+  - ghostscript
+
+remote_access_db: /etc/my.cnf.d/mariadb-server.cnf
+
+type_db: "mariadb"
+
+path_moodle_conf: /etc/nginx/conf.d/moodle.conf

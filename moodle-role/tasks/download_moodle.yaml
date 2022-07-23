@@ -1,0 +1,32 @@
+---
+- name: Downloading the Moodle project from the official website
+  get_url:
+    url: "{{ moodle_project }}"
+    dest: "{{ path_moodle_project }}"
+
+- name: Unzip the project
+  unarchive:
+    src: "{{ path_moodle_project }}/moodle-latest-39.tgz"
+    dest: "{{ path_moodle_project }}"
+    remote_src: yes
+
+- name: Granting rights to the project
+  file:
+    path: "{{ path_moodle_project }}/moodle"
+    state: directory
+    recurse: yes
+    owner: nginx
+    group: nginx 
+    mode: "0775"
+
+- name: Creating a directory for Moodle files
+  file:
+    path: "{{ path_moodle_project }}/moodledata"
+    state: directory
+    recurse: yes
+    group: nginx 
+    mode: "0770"
+
+
+  
+    
